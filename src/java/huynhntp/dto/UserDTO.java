@@ -10,6 +10,7 @@ package huynhntp.dto;
  * @author ACER
  */
 public class UserDTO {
+    private String userName;
     private String email;
     private String password;
     private String name;
@@ -19,7 +20,8 @@ public class UserDTO {
     private String roleID;
     private String createDate;
 
-    public UserDTO(String email, String password, String name, String phone, String address, boolean status, String roleID, String createDate) {
+    public UserDTO(String userName,String email, String password, String name, String phone, String address, boolean status, String roleID, String createDate) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.name = name;
@@ -30,11 +32,20 @@ public class UserDTO {
         this.createDate = createDate;
     }
 
-    public UserDTO(String email, String name, boolean status, String roleID) {
+    public UserDTO(String userName,String email, String name, boolean status, String roleID) {
+        this.userName = userName;
         this.email = email;
         this.name = name;
         this.status = status;
         this.roleID = roleID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     

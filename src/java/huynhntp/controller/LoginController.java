@@ -36,14 +36,14 @@ public class LoginController extends HttpServlet {
         String url = ERROR;
         boolean check = true;
         try {
-            String email = request.getParameter("email");
+            String email = request.getParameter("userName");
             String password = request.getParameter("password");
             String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLogin(email, password);
             if(user==null){
                 check = false;
-                request.setAttribute("ERROR", "Incorrect email or password");
+                request.setAttribute("ERROR", "Incorrect userName or password");
                 url = FAILED;
             }
             boolean verrifyCapcha = VerifyRecaptcha.verify(gRecaptchaResponse);

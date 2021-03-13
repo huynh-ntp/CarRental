@@ -4,6 +4,7 @@
     Author     : ACER
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,6 @@
         <title>Home Page</title>
     </head>
     <body>
-        <h1>Hello cc!</h1>
+        <jsp:include page="navbar.jsp"></jsp:include>
     </body>
 </html>

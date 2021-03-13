@@ -12,6 +12,6 @@
         <title>Register Status</title>
     </head>
     <body>
-        
+        ${requestScope.STATUS}
     </body>
 </html>

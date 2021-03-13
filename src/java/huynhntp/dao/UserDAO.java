@@ -27,15 +27,15 @@ public class UserDAO {
         try {
             conn = DBConnect.makeConnection();
             if(conn!=null){
-                String sql = "SELECT email,name,status,roleID"
+                String sql = "SELECT userName,email,name,status,roleID"
                         + " FROM tblUsers "
-                        + "WHERE email = ? and password = ?";
+                        + "WHERE userName = ? and password = ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, email);
                 stm.setString(2, password);
                 rs = stm.executeQuery();
                 if(rs.next()){
-                    dto = new UserDTO(rs.getString("email"), rs.getString("name"), rs.getBoolean("status"), rs.getString("roleID"));
+                    dto = new UserDTO(rs.getString("userName"),rs.getString("email"), rs.getString("name"), rs.getBoolean("status"), rs.getString("roleID"));
                 }
                 
             }
@@ -56,7 +56,31 @@ public class UserDAO {
                         + " WHERE email = ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, email);
-                stm.executeQuery();
+                stm.executeUpdate();
+            }
+        } catch (SQLException | NamingException e) {
+        }finally{
+            closeConnect();
+        }
+    }
+    
+    public void register(UserDTO dto) throws SQLException{
+        try {
+            conn = DBConnect.makeConnection();
+            if(conn!=null){
+                String sql = "INSERT INTO tblUsers (userName,password,email,name,phone,address,roleID,createDate"
+                        + "VALUES(?,?,?,?,?,?,?,?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, dto.getUserName());
+                stm.setString(2, dto.getPassword());
+                stm.setString(3, dto.getEmail());
+                stm.setString(4, dto.getName());
+                stm.setString(5, dto.getPhone());
+                stm.setString(6, dto.getAddress());
+                stm.setString(7, dto.getRoleID());
+                stm.setString(8, dto.getCreateDate());
+            
+                stm.executeUpdate();
             }
         } catch (SQLException | NamingException e) {
         }finally{

@@ -6,10 +6,13 @@
 package huynhntp.controller;
 
 import huynhntp.dao.UserDAO;
+import huynhntp.dto.UserDTO;
+import huynhntp.util.SendMail;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.naming.NamingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +32,7 @@ public class RegisterController extends HttpServlet {
         String url = ERROR;
         boolean check = true;
         try {
+            String userName = request.getParameter("userName");
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
@@ -39,22 +43,35 @@ public class RegisterController extends HttpServlet {
                 check = false;
                 request.setAttribute("STATUS", "Confirm password not correct");
             }
+            if(phone.trim().isEmpty() || addr.trim().isEmpty()){
+                check = false;
+                request.setAttribute("STATUS", "Please fill out all the information in the boxes ");
+            }
+             
+            
             if(check){
                 UserDAO dao = new UserDAO();
-                
+                SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
+                UserDTO dto = new UserDTO(userName, email, password, name, phone, addr, false , "US", fm.format(date));
+                dao.register(dto);
+                request.setAttribute("STATUS", "Register success! Please check your email to verify!");
+                SendMail.send("TIle", "OKE", email);
             }
             url = SUCCESS;
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             if(e.toString().contains("duplicate")){
                 request.setAttribute("STATUS", "Email has been existed!");
             }
+            log(e.toString());
             url = SUCCESS;
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
+        
+        
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

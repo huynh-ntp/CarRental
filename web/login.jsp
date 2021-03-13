@@ -276,22 +276,23 @@
         <h2>Rental Car</h2>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="RegisterController">
+                <form action="MainController">
                     <h1>Create Account</h1>
+                    <input type="text" name="userName" placeholder="UserName" />
                     <input type="email" name="email" placeholder="Email" />
-                    <input type="text" name="name" placeholder="Username" />
-                    <input type="text" name="phone" placeholder="Username" />  
-                    <input type="text" name="name" placeholder="Username" />   
+                    <input type="text" name="name" placeholder="Name" />
+                    <input type="text" name="phone" placeholder="Phone" />  
+                    <input type="text" name="addr" placeholder="Address" />   
                     <input type="password" name="password" placeholder="Password" />
                     <input type="password" name="confirmPass" placeholder="Confirm" />
-                    <button>Sign Up</button>
+                    <button type="submit" name="btnAction" value="Sign Up">Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="MainController">
                     <h1>Sign in</h1>
                     <span>or use your account</span>
-                    <input type="email"  name="email" required ="" placeholder="Email" />
+                    <input type="text"  name="userName" required ="" placeholder="UserName" />
                     <input type="password" required = "" name="password" placeholder="Password" />
                     <div class="g-recaptcha" data-sitekey="6Ldgo98ZAAAAANo7O4Fx7O2rYS65Do_W8K0HRuc-"></div>
                     <button type="submit" value="Login" name="btnAction">Sign In</button>

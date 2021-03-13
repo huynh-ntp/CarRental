@@ -19,6 +19,7 @@ public class MainController extends HttpServlet {
 
     private final String LOGIN = "LoginController";
     private final String ERROR = "index.html";
+    private final String REGISTER = "RegisterController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -27,6 +28,8 @@ public class MainController extends HttpServlet {
             String action = request.getParameter("btnAction");
             if("Login".equals(action)){
                 url = LOGIN;
+            }else if("Sign Up".equals(action)){
+                url = REGISTER;
             }
         } catch (Exception e) {
         }finally{
